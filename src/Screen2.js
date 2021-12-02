@@ -42,11 +42,11 @@ export default function Screen2({}) {
                 Screen 2
             </Text>
             <Pressable
-                onPress={()=>{Navigation.navigate('Screen_1')}}
+                onPress={()=>{Navigation.toggleDrawer()}}
                 style={({ pressed }) => ({ backgroundColor: pressed ? 'red' : '#0f0' })}
             >
                 <Text style={style.text}>
-                    Back To Screen 1
+                    Toggle Drawer
                 </Text>
             </Pressable>
         </View>

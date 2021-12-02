@@ -22,6 +22,8 @@ import {
 } from 'react-native';
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Icons from './constents/images';
 
 
@@ -46,13 +48,38 @@ function App() {
     <NavigationContainer
     initialRouteName="Screen_2"
     drawerpostion= 'right'
+    drawerType='slide'
+    hideStatusBar={true}
     >
-      <Drawer.Navigator>
+      <Drawer.Navigator
+      drawerStyle={{
+        backgroundColor:'#00f'
+      }}
+      screenOptions={{
+        headerShown:true,
+        swipeEnabled:false,
+        gestureEnabled:false,
+        headerTitleAlign:'center',
+        headerStyle:{
+          backgroundColor:'#0080ff'
+        },
+        headerTintColor:'#ffff',
+        headerTitleStyle:{
+          fontSize:25,
+          fontWeight:'bold',
+        }
+      }}
+      >
         <Drawer.Screen
           name='Screen_1'
           component={Screen1}
           options={{
-            header: () => null
+            title:'Screen1',
+            drawerIcon:({focused}) =>(
+              <FontAwesome5
+              name="btc"
+              />
+            )
           }}
         />
         <Drawer.Screen
