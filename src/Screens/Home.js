@@ -9,11 +9,13 @@ import {
 } from 'react-native';
 import GlobalStyle from '../Utiles/GlobalStyle';
 import { useNavigation } from '@react-navigation/core';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import * as Actions from './../redux/actions'
 
 export default function Screen1({ route }) {
 
+    const dispatch = useDispatch()
+    const count = useSelector(state => state.counter.count)
     const Users = [
         {
             id: 1,
@@ -74,7 +76,7 @@ export default function Screen1({ route }) {
             </View>
             <View style={style.body}>
                 <Pressable
-                    onPress={() => { Navigation.navigate('Screen_4') }}
+                    onPress={() => { dispatch(Actions.addDecrement(1))}}
                     style={({ pressed }) => ({ backgroundColor: pressed ? 'red' : '#0f0' })}
                 >
                     <Text style={[
@@ -85,9 +87,17 @@ export default function Screen1({ route }) {
                     </Text>
                 </Pressable>
             </View>
+            <Text style={[
+                GlobalStyle.customFont,
+                style.text
+            ]}>
+                {count}
+            </Text>
             <View style={style.body}>
                 <Pressable
-                    onPress={() => { Navigation.navigate('Screen_5') }}
+                    onPress={() => {
+                        dispatch(Actions.addIncrment(1))
+                    }}
                     style={({ pressed }) => ({ backgroundColor: pressed ? 'red' : '#0f0' })}
                 >
                     <Text style={[

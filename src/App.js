@@ -41,99 +41,136 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 // const Drawer = createDrawerNavigator();
 
 // const Tab = createBottomTabNavigator();
+import createSagaMiddleware from "redux-saga";
+import { applyMiddleware, combineReducers, createStore, compose } from "redux";
+import { Provider, useSelector } from 'react-redux';
+import {reactotronRedux} from 'reactotron-redux';
 
-const stack = createStackNavigator();
+// import
+import Reactotron from './../ReactotronConfig';
+import reducers from './redux/index';
+import rootSaga from './redux/sagas';
+
+var store;
+const sagaMonitor = Reactotron.createSagaMonitor()
+
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
+
+// Reactotron
+if (__DEV__) {
+  store = createStore(
+    reducers,
+    compose(
+      applyMiddleware(sagaMiddleware),
+      Reactotron.createEnhancer(),
+    ),
+  );
+} else {
+  store = createStore(
+    reducers,
+    compose(
+      applyMiddleware(sagaMiddleware)
+    ),
+  );
+}
+// saga run
+sagaMiddleware.run(rootSaga);
+
+
+const Drawer = createDrawerNavigator();
 function App() {
   return (
-    <NavigationContainer
-      initialRouteName="Screen_2"
-      drawerpostion='right'
-      drawerType='slide'
-      hideStatusBar={true}
-    >
-      <Drawer.Navigator
-        drawerStyle={{
-          backgroundColor: '#00f'
-        }}
-        screenOptions={{
-          headerShown: true,
-          swipeEnabled: false,
-          gestureEnabled: false,
-          headerTitleAlign: 'center',
-          headerStyle: {
-            backgroundColor: '#0080ff'
-          },
-          headerTintColor: '#ffff',
-          headerTitleStyle: {
-            fontSize: 25,
-            fontWeight: 'bold',
-          }
-        }}
+    <Provider store={store}>
+      <NavigationContainer
+        initialRouteName="Screen_2"
+        drawerpostion='right'
+        drawerType='slide'
+        hideStatusBar={true}
       >
-        <Drawer.Screen
-          name='Screen_1'
-          component={Screen1}
-          options={{
-            title: 'Screen1',
-            drawerIcon: ({ focused }) => (
-              <FontAwesome5
-                name="btc"
-              />
-            )
+        <Drawer.Navigator
+          drawerStyle={{
+            backgroundColor: '#00f'
           }}
-        />
-        <Drawer.Screen
-          name='Screen_2'
-          component={Screen2}
-          options={{
-            title:'Screen2',
-            drawerIcon:({focused}) =>(
-              <FontAwesome5
-              name="btc"
-              />
-            )
+          screenOptions={{
+            headerShown: true,
+            swipeEnabled: false,
+            gestureEnabled: false,
+            headerTitleAlign: 'center',
+            headerStyle: {
+              backgroundColor: '#0080ff'
+            },
+            headerTintColor: '#ffff',
+            headerTitleStyle: {
+              fontSize: 25,
+              fontWeight: 'bold',
+            }
           }}
-          initialParams={{ ItemNmae: 'Item form Drawer', Itemid: 13 }}
-        />
-        <Drawer.Screen
-          name='Screen_3'
-          component={Screen3}
-          options={{
-            title: 'Screen3',
-            drawerIcon: ({ focused }) => (
-              <FontAwesome5
-                name="btc"
-              />
-            )
-          }}
-        />
-        <Drawer.Screen
-          name='Screen_4'
-          component={Screen4}
-          options={{
-            title:'Screen4',
-            drawerIcon:({focused}) =>(
-              <FontAwesome5
-              name="btc"
-              />
-            )
-          }}
-        />
-        <Drawer.Screen
-          name='Screen_5'
-          component={Screen5}
-          options={{
-            title:'Screen5',
-            drawerIcon:({focused}) =>(
-              <FontAwesome5
-              name="btc"
-              />
-            )
-          }}
-        />
+        >
+          <Drawer.Screen
+            name='Screen_1'
+            component={Screen1}
+            options={{
+              title: 'Screen1',
+              drawerIcon: ({ focused }) => (
+                <FontAwesome5
+                  name="btc"
+                />
+              )
+            }}
+          />
+          <Drawer.Screen
+            name='Screen_2'
+            component={Screen2}
+            options={{
+              title: 'Screen2',
+              drawerIcon: ({ focused }) => (
+                <FontAwesome5
+                  name="btc"
+                />
+              )
+            }}
+            initialParams={{ ItemNmae: 'Item form Drawer', Itemid: 13 }}
+          />
+          <Drawer.Screen
+            name='Screen_3'
+            component={Screen3}
+            options={{
+              title: 'Screen3',
+              drawerIcon: ({ focused }) => (
+                <FontAwesome5
+                  name="btc"
+                />
+              )
+            }}
+          />
+          <Drawer.Screen
+            name='Screen_4'
+            component={Screen4}
+            options={{
+              title: 'Screen4',
+              drawerIcon: ({ focused }) => (
+                <FontAwesome5
+                  name="btc"
+                />
+              )
+            }}
+          />
+          <Drawer.Screen
+            name='Screen_5'
+            component={Screen5}
+            options={{
+              title: 'Screen5',
+              drawerIcon: ({ focused }) => (
+                <FontAwesome5
+                  name="btc"
+                />
+              )
+            }}
+          />
 
-      </Drawer.Navigator>
-    </NavigationContainer>
+        </Drawer.Navigator>
+      </NavigationContainer>
+    </Provider>
   )
 }
 
