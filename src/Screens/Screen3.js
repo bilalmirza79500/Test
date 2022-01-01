@@ -20,12 +20,14 @@ import {
     navigation,
 
 } from 'react-native';
+import GlobalStyle from '../Utiles/GlobalStyle';
+
 
 
 import { useNavigation } from '@react-navigation/core';
 
 
-export default function Screen5({}) {
+export default function Screen3({}) {
     const Navigation = useNavigation();
     // const onPressHandler = () => {
         // navigation.navigate('Screen_A');
@@ -35,14 +37,20 @@ export default function Screen5({}) {
 
     return (
         <View style={style.body}>
-            <Text style={style.text}>
-                Screen 5
+            <Text style={[
+                GlobalStyle.customFont,
+                style.text
+            ]}>
+                Screen 3
             </Text>
             <Pressable
                 onPress={()=>{Navigation.navigate('Screen_1')}}
                 style={({ pressed }) => ({ backgroundColor: pressed ? 'red' : '#0f0' })}
             >
-                <Text style={style.text}>
+                <Text style={[
+                GlobalStyle.customFont,
+                style.text
+            ]}>
                     Back To Screen 1
                 </Text>
             </Pressable>
@@ -56,9 +64,9 @@ const style = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-    text: {
-      fontSize: 40,
-      fontWeight: 'bold',
-      margin: 10,
-    },
+    // text: {
+    //   fontSize: 40,
+    //   fontWeight: 'bold',
+    //   margin: 10,
+    // },
   })

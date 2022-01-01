@@ -21,14 +21,13 @@ import {
 
 } from 'react-native';
 
-
-
+import GlobalStyle from '../Utiles/GlobalStyle';
 
 
 import { useNavigation } from '@react-navigation/core';
 
 
-export default function Screen2({}) {
+export default function Screen4({}) {
     const Navigation = useNavigation();
     // const onPressHandler = () => {
         // navigation.navigate('Screen_A');
@@ -39,14 +38,14 @@ export default function Screen2({}) {
     return (
         <View style={style.body}>
             <Text style={style.text}>
-                Screen 2
+                Screen 4
             </Text>
             <Pressable
-                onPress={()=>{Navigation.toggleDrawer()}}
+                onPress={()=>{Navigation.navigate('Screen_1')}}
                 style={({ pressed }) => ({ backgroundColor: pressed ? 'red' : '#0f0' })}
             >
                 <Text style={style.text}>
-                    Toggle Drawer
+                    Back To Screen 1
                 </Text>
             </Pressable>
         </View>

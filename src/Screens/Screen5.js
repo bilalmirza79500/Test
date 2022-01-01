@@ -21,12 +21,12 @@ import {
 
 } from 'react-native';
 
-
+import GlobalStyle from '../Utiles/GlobalStyle';
 
 import { useNavigation } from '@react-navigation/core';
 
 
-export default function Screen4({}) {
+export default function Screen5({}) {
     const Navigation = useNavigation();
     // const onPressHandler = () => {
         // navigation.navigate('Screen_A');
@@ -37,7 +37,7 @@ export default function Screen4({}) {
     return (
         <View style={style.body}>
             <Text style={style.text}>
-                Screen 4
+                Screen 5
             </Text>
             <Pressable
                 onPress={()=>{Navigation.navigate('Screen_1')}}
